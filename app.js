@@ -65,4 +65,11 @@ app.get('/complicacoes', async (req, res)=>{
     console.log(result)
     res.json(result.rows)
 })
+
+app.get('/cesarianas', async (req, res)=>{
+    const result = await pool.query('select count(*) numero,  indicacao_parto as descricao ' +
+        'from partos where indicacao_parto is not null group by indicacao_parto;')
+    console.log(result)
+    res.json(result.rows)
+})
 app.listen(3002, ()=>{console.log("http://localhost:3002")})
